@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
   setHeader(res)
   try {
     res.status(200).json({
-      configuredLevel: logger.level
+      configuredLevel: logger.level,
     })
   } catch (error) {
     logger.error('Error occurs: ', error)
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     if (req.body.configuredLevel.toUpperCase() in logger.levels) {
       logger.level = req.body.configuredLevel.toUpperCase()
       res.status(204).send()
-    } 
+    }
   } catch (error) {
     logger.error('Error occurs: ', error)
     res.status(400).send()
