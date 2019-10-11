@@ -45,4 +45,4 @@ src
 5. You can break your api to some paths and package it to some folders. Each folder will contains the router code file (index.js) and the logic code file (***.service.js).
 6. So to create your new apis: Just create some folders and files in the **api** folder.
 7. I created some APIs with mongodb as a demo!
-8. Injoy!!!
+8. Enjoy!!!
