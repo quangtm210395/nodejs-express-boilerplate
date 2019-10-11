@@ -15,3 +15,5 @@ rules:
   object-curly-newline: 0
   object-curly-spacing: 0
   no-console: 0
+  dot-notation: 0
+  global-require: 0

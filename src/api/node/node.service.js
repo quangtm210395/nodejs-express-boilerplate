@@ -1,6 +1,8 @@
 
 const logger = require('../../helper/logger-helper')
 const setHeader = require('../../helper/header-helper')
+const config = require('../../config')
+const {MongodbConnector} = require('../../helper/mongodb-helper')
 
 module.exports = {
   /**
@@ -11,10 +13,17 @@ module.exports = {
     try {
       logger.info('node-test-get-api request body: ', req.body)
       // processing
-
+      /**
+       * @type {import('mongodb').MongoClient} 
+       * connect to mongodb 
+       * */
+      let client = await MongodbConnector.init(config.MONGO_URI, undefined)
+      let players = await client.db().collection('players').find({}).toArray()
+      logger.debug('players: ', players)
       res.status(200).json({
         message: 'This is node test get api demo',
         result: true,
+        data: players,
       })
     } catch (error) {
       logger.error('node-test-get-api Error occur ', error)
