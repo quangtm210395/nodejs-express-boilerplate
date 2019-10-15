@@ -1,0 +1,75 @@
+swagger: "2.0"
+info:
+  title: nodejs express boilerplate apis
+  version: '1.0.0'
+  description: nodejs express boilerplate apis
+host: 
+basePath: /
+schemes:
+  - http
+  - https
+securityDefinition:
+  bearerAuth:
+    type: 'apiKey'
+    name: 'Authorization'
+    scheme: 'Bearer'
+    in: 'header'
+tags:
+  - name: node-demo
+    description: Demo Controller
+paths:
+  /api/node-demo:
+    get:
+      tags: 
+        - node-demo
+      name: demo get api
+      summary: node-test-get-api
+      parameters:
+        - in: query
+          name: query
+          description: query
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseData'
+    post:
+      tags: 
+        - node-demo
+      name: demo post api
+      summary: node-test-post-api
+      parameters:
+        - in: body
+          name: body
+          description: request body
+          schema: 
+            type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseData'
+
+definitions:
+  # NodeTestApiDemoResDTO:
+  #   type: object
+  #   title: NodeTestApiDemoResDTO
+  #   properties:
+  #     name: 
+  #       type: string
+  #     age: 
+  #       type: number
+  #       format: integer64
+  #     position:
+  #       type: string
+  ResponseData:
+    properties:
+      result:
+        type: boolean
+      code:
+        type: integer
+      message:
+        type: string
+      data:
+        type: object

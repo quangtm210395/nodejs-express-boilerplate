@@ -9,11 +9,23 @@ const logger = require('./src/helper/logger-helper')
 
 const {MongodbConnector} = require('./src/helper/mongodb-helper')
 
+const swaggerUi = require('swagger-ui-express')
+const yaml = require('yamljs')
+
 const app = express()
 const server = new http.Server(app)
 
 // config express with body parser to read request body as object (json)
+let swaggerSpec = {}
 config.settingExpress(app)
+
+swaggerSpec = yaml.load('./swagger.yaml')
+app.use('/v2/api-docs', (req, res) => {
+  let host = req['headers']['host']
+  let spec = Object.assign({}, swaggerSpec, {'host':host})
+  res.status(200).send(spec)
+})
+app.use('/swagger-ui.html', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 // root routing
 routes(app)
